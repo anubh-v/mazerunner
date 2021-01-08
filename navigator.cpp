@@ -65,7 +65,7 @@ void update_direction(Program program, Thread thread) {
             apply_three_neighbour_rule(neighbours, thread);
             break;
         case 4:
-            apply_four_neighbour_rule(neigbhours, thread);
+            apply_four_neighbour_rule(neighbours, thread);
             break;
         default:
             // error
@@ -103,14 +103,14 @@ bool is_neighbour(int x, int y, int num_rows, int num_cols, char** grid) {
 // neighbours = [left, right, up, down]
 // Go towards the one available direction
 void apply_one_neighbour_rule(bool neighbours[4], Thread thread) {
-    if (neighbour[0]) {
-        thread.current_direction = Thread.LEFT;
-    } else if (neighbour[1]) {
-        thread.current_direction = Thread.RIGHT;
-    } else if (neighbour[2]) {
-        thread.current_direction = Thread.UP;
-    } else if (neighbour[3]) {
-        thread,current_direction = Thread.DOWN;
+    if (neighbours[0]) {
+        thread.current_direction = Thread::LEFT;
+    } else if (neighbours[1]) {
+        thread.current_direction = Thread::RIGHT;
+    } else if (neighbours[2]) {
+        thread.current_direction = Thread::UP;
+    } else if (neighbours[3]) {
+        thread.current_direction = Thread::DOWN;
     }
 }
 
@@ -136,7 +136,7 @@ void apply_three_neighbour_rule(bool neighbours[4], Thread thread) {
 }
 
 void apply_four_neighbour_rule(bool neighbours[4], Thread thread) {
-    std::stack<int> main_stack = thread.main_stack;
+    std::stack<int> main_stack = thread.stack;
     int top_element = main_stack.top();
 
     if (top_element == 0) {
@@ -151,42 +151,42 @@ void apply_four_neighbour_rule(bool neighbours[4], Thread thread) {
 
 void turn_left(Thread thread) {
 
-    if (thread.current_direction = Thread.UP) {
-        thread.current_direction = Thread.LEFT;
-    } else if (thread.current_direction = Thread.DOWN) {
-        thread.current_direction = Thread.RIGHT;
-    } else if (thread.current_direction = Thread.LEFT) {
-        thread.current_direction = Thread.DOWN;
+    if (thread.current_direction = Thread::UP) {
+        thread.current_direction = Thread::LEFT;
+    } else if (thread.current_direction = Thread::DOWN) {
+        thread.current_direction = Thread::RIGHT;
+    } else if (thread.current_direction = Thread::LEFT) {
+        thread.current_direction = Thread::DOWN;
     } else { // current direction is rightwards
-        thread.current_direction = Thread.UP;
+        thread.current_direction = Thread::UP;
     }
 
 }
 
 void turn_right(Thread thread) {
 
-   if (thread.current_direction = Thread.UP) {
-        thread.current_direction = Thread.RIGHT;
-    } else if (thread.current_direction = Thread.DOWN) {
-        thread.current_direction = Thread.LEFT;
-    } else if (thread.current_direction = Thread.LEFT) {
-        thread.current_direction = Thread.UP;
+   if (thread.current_direction = Thread::UP) {
+        thread.current_direction = Thread::RIGHT;
+    } else if (thread.current_direction = Thread::DOWN) {
+        thread.current_direction = Thread::LEFT;
+    } else if (thread.current_direction = Thread::LEFT) {
+        thread.current_direction = Thread::UP;
     } else { // current direction is rightwards
-        thread.current_direction = Thread.DOWN;
+        thread.current_direction = Thread::DOWN;
     }
 
 }
 
 void turn_back(Thread thread) {
 
-   if (thread.current_direction = Thread.UP) {
-        thread.current_direction = Thread.DOWN;
-    } else if (thread.current_direction = Thread.DOWN) {
-        thread.current_direction = Thread.UP;
-    } else if (thread.current_direction = Thread.LEFT) {
-        thread.current_direction = Thread.RIGHT;
+   if (thread.current_direction = Thread::UP) {
+        thread.current_direction = Thread::DOWN;
+    } else if (thread.current_direction = Thread::DOWN) {
+        thread.current_direction = Thread::UP;
+    } else if (thread.current_direction = Thread::LEFT) {
+        thread.current_direction = Thread::RIGHT;
     } else { // current direction is rightwards
-        thread.current_direction = Thread.LEFT;
+        thread.current_direction = Thread::LEFT;
     }
 
 }
@@ -195,13 +195,13 @@ void turn_back(Thread thread) {
 // neighbours is [left, right, up, down]
 bool wall_ahead(bool neighbours[], Thread thread) {
     switch(thread.current_direction) {
-        case Thread.LEFT:
+        case Thread::LEFT:
             return !neighbours[0];
-        case Thread.RIGHT:
+        case Thread::RIGHT:
             return !neighbours[1];
-        case Thread.UP:
+        case Thread::UP:
             return !neighbours[2];
-        case Thread.DOWN:
+        case Thread::DOWN:
             return !neighbours[3];
         default:
             break;
@@ -215,33 +215,33 @@ bool came_from(bool neighbours[], Thread thread) {
 
 bool go_other_direction(bool neighbours[], Thread thread) {
     switch(thread.current_direction) {
-        case Thread.LEFT: {
+        case Thread::LEFT: {
             for (int i = 0; i < 4; i++) {
-                if (neighbours[i] && i != Thread.LEFT) {
+                if (neighbours[i] && i != Thread::LEFT) {
                     thread.current_direction = i;
                 }
             }
             break;
         }
-        case Thread.RIGHT: {
+        case Thread::RIGHT: {
             for (int i = 0; i < 4; i++) {
-                if (neighbours[i] && i != Thread.RIGHT) {
+                if (neighbours[i] && i != Thread::RIGHT) {
                     thread.current_direction = i;
                 }
             }
             break;
         }
-        case Thread.UP: {
+        case Thread::UP: {
             for (int i = 0; i < 4; i++) {
-                if (neighbours[i] && i != Thread.UP) {
+                if (neighbours[i] && i != Thread::UP) {
                     thread.current_direction = i;
                 }
             }
             break;
         }
-        case Thread.DOWN: {
+        case Thread::DOWN: {
             for (int i = 0; i < 4; i++) {
-                if (neighbours[i] && i != Thread.DOWN) {
+                if (neighbours[i] && i != Thread::DOWN) {
                     thread.current_direction = i;
                 }
             }
