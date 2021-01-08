@@ -1,13 +1,12 @@
 #include "thread.h"
 #include <queue>
+#include "instruction_dispatcher.h"
 
 using namespace std;
 
 void set_starting_pointer(Thread thread, char** program);
 
 void run_single_instruction(char** program, Thread thread);
-
-void eval_instruction(char instruction, Thread thread);
 
 void update_direction(char** program, Thread thread);
 
@@ -45,7 +44,7 @@ void run_single_instruction(char** program, Thread thread) {
 
     char instruction; // get current instruction
 
-    eval_instruction(instruction, thread);
+    eval_instruction(instruction, thread.stack);
 
     update_direction(program, thread);
 
