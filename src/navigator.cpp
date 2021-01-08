@@ -136,7 +136,7 @@ void apply_three_neighbour_rule(bool neighbours[4], Thread thread) {
 }
 
 void apply_four_neighbour_rule(bool neighbours[4], Thread thread) {
-    std::stack<int> main_stack = thread.stack;
+    std::stack<int> main_stack = thread.main_stack;
     int top_element = main_stack.top();
 
     if (top_element == 0) {

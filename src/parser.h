@@ -11,6 +11,7 @@ typedef struct {
 } Program;
 
 void parse(Program* p);
+void padrows(Program* p, int max_col);
 void prettyprint(Program *p);
 
 #endif
