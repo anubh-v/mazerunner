@@ -7,7 +7,7 @@ void set_starting_pointer(Thread thread, char** program);
 
 void run_single_instruction(char** program, Thread thread);
 
-void eval_instruction(char** program, Thread thread);
+void eval_instruction(char instruction, Thread thread);
 
 void update_direction(char** program, Thread thread);
 
@@ -45,9 +45,9 @@ void run_single_instruction(char** program, Thread thread) {
 
     char instruction; // get current instruction
 
-    eval_instruction(char** program, Thread thread);
+    eval_instruction(instruction, thread);
 
-    update_direction(char** program, Thread thread);
+    update_direction(program, thread);
 
 }
 
