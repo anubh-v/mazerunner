@@ -15,11 +15,12 @@ void interpret(char** program) {
     // setup first thread
     Thread root_thread;
     set_starting_pointer(root_thread, program);
-    queue.push(runnable_threads);
+    runnable_threads.push(root_thread);
 
     while(true) {
         // get thread to run
-        Thread current_thread = runnable_threads.pop();
+        Thread current_thread = runnable_threads.back();
+        runnable_threads.pop();
 
         // interpret program according to instructions
         run_single_instruction(program, current_thread);
