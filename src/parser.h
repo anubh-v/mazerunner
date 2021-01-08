@@ -1,3 +1,5 @@
+/* Parses input to give a 2D array */
+
 #include <stdio.h>
 
 #ifndef PARSE_H
