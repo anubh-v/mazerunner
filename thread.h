@@ -1,12 +1,16 @@
 #include <string>
 #include <stack>
 
-class Thread {
+#ifndef THREAD_H
+#define THREAD_H
 
-    static const int RIGHT = 0;
-    static const int LEFT = 1;
-    static const int UP = 2;
-    static const int DOWN = 3;
+class Thread {
+    
+    public:
+      static const int LEFT = 0;
+      static const int RIGHT = 1;
+      static const int UP = 2;
+      static const int DOWN = 3;
 
     public:
       int current_direction = RIGHT;
@@ -57,3 +61,5 @@ class Thread {
         program_pointer[1]++;
     }
 };
+
+#endif
