@@ -8,7 +8,7 @@ void set_starting_pointer(Thread thread, char** program);
 
 void run_single_instruction(char** program, Thread thread);
 
-void update_direction(char** program, Thread thread);
+//void update_direction(char** program, Thread thread);
 
 void interpret(char** program) {
 
@@ -41,12 +41,13 @@ void set_starting_pointer(Thread thread, char** program) {
 
 void run_single_instruction(char** program, Thread thread) {
     thread.move_to_next_inst();
+   
+    int x = thread.program_pointer[0];
+    int y = thread.program_pointer[1];
+    char instruction = program[x][y];
+    eval_instruction(instruction, thread);
 
-    char instruction; // get current instruction
-
-    eval_instruction(instruction, thread.stack);
-
-    update_direction(program, thread);
+    // update_direction(program, thread);
 
 }
 
