@@ -36,6 +36,7 @@ bool is_instruction(char possible_inst) {
        case '?':
        case '.':
        case '!':
+       case '\\':
        case '<':
        case '>':
        case '^':
