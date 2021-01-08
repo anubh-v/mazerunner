@@ -7,6 +7,10 @@ void set_starting_pointer(Thread thread, char** program);
 
 void run_single_instruction(char** program, Thread thread);
 
+void eval_instruction(char** program, Thread thread);
+
+void update_direction(char** program, Thread thread);
+
 void interpret(char** program) {
 
     // setup a queue of threads (empty for now)
@@ -37,6 +41,14 @@ void set_starting_pointer(Thread thread, char** program) {
 }
 
 void run_single_instruction(char** program, Thread thread) {
+    thread.move_to_next_inst();
+
+    char instruction; // get current instruction
+
+    eval_instruction(char** program, Thread thread);
+
+    update_direction(char** program, Thread thread);
+
 }
 
 
