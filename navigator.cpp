@@ -51,6 +51,7 @@ void update_direction(Program program, Thread thread) {
         case 2:
             break;
         case 3:
+            apply_three_neighbour_rule(neighbours, thread);
             break;
         case 4:
             apply_four_neighbour_rule(neigbhours, thread);
@@ -89,6 +90,7 @@ void is_neighbour(int x, int y, int num_rows, int num_cols, char** grid) {
 }
 
 // neighbours = [left, right, up, down]
+// Go towards the one available direction
 void apply_one_neighbour_rule(bool neighbours[4], Thread thread) {
     if (neighbour[0]) {
         thread.current_direction = Thread.LEFT;
@@ -98,6 +100,16 @@ void apply_one_neighbour_rule(bool neighbours[4], Thread thread) {
         thread.current_direction = Thread.UP;
     } else if (neighbour[3]) {
         thread,current_direction = Thread.DOWN;
+    }
+}
+
+void apply_two_neighour_rule(bool neighbours[4], Thread thread) {
+    
+    // check if one of the neigbhours was just passed by the program (we do not go backwards)
+    if (came_from(neighbours, thread)) {
+        go_other_direction(neighbours, thread);
+    } else {
+        // go straight
     }
 }
 
@@ -180,6 +192,50 @@ bool wall_ahead(bool[] neighbours, Thread thread) {
             return !neighbours[2];
         case Thread.DOWN:
             return !neighbours[3];
+        default:
+            break;
+    }
+}
+
+// check whether there is a neighbour in the current travel direction
+bool came_from(bool[] neighbours, Thread thread) {
+    return !wall_ahead(neighbours, thread);
+}
+
+bool go_other_direction(bool[] neighbours, Thread thread) {
+    switch(thread.current_direction) {
+        case Thread.LEFT: {
+            for (int i = 0; i < 4; i++) {
+                if (neighbours[i] && i != Thread.LEFT) {
+                    thread.current_direction = i;
+                }
+            }
+            break;
+        }
+        case Thread.RIGHT: {
+            for (int i = 0; i < 4; i++) {
+                if (neighbours[i] && i != Thread.RIGHT) {
+                    thread.current_direction = i;
+                }
+            }
+            break;
+        }
+        case Thread.UP: {
+            for (int i = 0; i < 4; i++) {
+                if (neighbours[i] && i != Thread.UP) {
+                    thread.current_direction = i;
+                }
+            }
+            break;
+        }
+        case Thread.DOWN: {
+            for (int i = 0; i < 4; i++) {
+                if (neighbours[i] && i != Thread.DOWN) {
+                    thread.current_direction = i;
+                }
+            }
+            break;
+        }
         default:
             break;
     }
