@@ -5,7 +5,18 @@
 
 void turn_left(Thread thread);
 void turn_right(Thread thread);
-void is_neighbour(int x, int y, int num_rows, int num_cols, char** grid);
+bool is_neighbour(int x, int y, int num_rows, int num_cols, char** grid);
+void apply_one_neighbour_rule(bool neighbours[4], Thread thread);
+void apply_two_neighbour_rule(bool neighbours[4], Thread thread);
+void apply_three_neighbour_rule(bool neighbours[4], Thread thread);
+void apply_four_neighbour_rule(bool neighbours[4], Thread thread);
+void turn_left(Thread thread);
+void turn_right(Thread thread);
+void turn_back(Thread thread);
+bool wall_ahead(bool neighbours[], Thread thread);
+bool came_from(bool neighbours[], Thread thread);
+bool go_other_direction(bool neighbours[], Thread thread);
+
 
 void update_direction(Program program, Thread thread) {
 
@@ -65,7 +76,7 @@ void update_direction(Program program, Thread thread) {
 
 }
 
-void is_neighbour(int x, int y, int num_rows, int num_cols, char** grid) {
+bool is_neighbour(int x, int y, int num_rows, int num_cols, char** grid) {
     if (y >= num_cols) {
           return false; // point is below the grid
     }
@@ -182,7 +193,7 @@ void turn_back(Thread thread) {
 
 // checks whether there is a wall in current travel direction
 // neighbours is [left, right, up, down]
-bool wall_ahead(bool[] neighbours, Thread thread) {
+bool wall_ahead(bool neighbours[], Thread thread) {
     switch(thread.current_direction) {
         case Thread.LEFT:
             return !neighbours[0];
@@ -198,11 +209,11 @@ bool wall_ahead(bool[] neighbours, Thread thread) {
 }
 
 // check whether there is a neighbour in the current travel direction
-bool came_from(bool[] neighbours, Thread thread) {
+bool came_from(bool neighbours[], Thread thread) {
     return !wall_ahead(neighbours, thread);
 }
 
-bool go_other_direction(bool[] neighbours, Thread thread) {
+bool go_other_direction(bool neighbours[], Thread thread) {
     switch(thread.current_direction) {
         case Thread.LEFT: {
             for (int i = 0; i < 4; i++) {
