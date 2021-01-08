@@ -53,6 +53,7 @@ void update_direction(Program program, Thread thread) {
         case 3:
             break;
         case 4:
+            apply_four_neighbour_rule(neigbhours, thread);
             break;
         default:
             // error
@@ -100,6 +101,23 @@ void apply_one_neighbour_rule(bool neighbours[4], Thread thread) {
     }
 }
 
+void apply_three_neighbour_rule(bool neighbours[4], Thread thread) {
+    std::stack<int> main_stack = thread.main_stack;
+    int top_element = main_stack.top();
+    
+    if (top_element == 0) {
+        // go straight, unless there is a wall straight ahead
+        if (wall_ahead(neighbours, thread)) {
+            // there is wall ahead, go back
+            turn_back(thread);
+        } else {
+           // go straight - no need to change direction
+        }
+    } else if 
+
+
+}
+
 void apply_four_neighbour_rule(bool neighbours[4], Thread thread) {
     std::stack<int> main_stack = thread.main_stack;
     int top_element = main_stack.top();
@@ -108,9 +126,9 @@ void apply_four_neighbour_rule(bool neighbours[4], Thread thread) {
         // keep going straight - no need to change direction
     } else if (top_element < 0) {
         // turn left
-        turn_left(Thread thread);
+        turn_left(thread);
     } else {
-        turn_right(Thread thread);
+        turn_right(thread);
     }
 }
 
@@ -130,7 +148,7 @@ void turn_left(Thread thread) {
 
 void turn_right(Thread thread) {
 
-    if (thread.current_direction = Thread.UP) {
+   if (thread.current_direction = Thread.UP) {
         thread.current_direction = Thread.RIGHT;
     } else if (thread.current_direction = Thread.DOWN) {
         thread.current_direction = Thread.LEFT;
@@ -142,4 +160,17 @@ void turn_right(Thread thread) {
 
 }
 
+void turn_back(Thread thread) {
+
+   if (thread.current_direction = Thread.UP) {
+        thread.current_direction = Thread.DOWN;
+    } else if (thread.current_direction = Thread.DOWN) {
+        thread.current_direction = Thread.UP;
+    } else if (thread.current_direction = Thread.LEFT) {
+        thread.current_direction = Thread.RIGHT;
+    } else { // current direction is rightwards
+        thread.current_direction = Thread.LEFT;
+    }
+
+}
 
