@@ -1,6 +1,6 @@
 #include <stack>
 #include "thread.h"
-#include "src/parser.h"
+#include "parser.h"
 #include "instruction_set.h"
 
 void turn_left(Thread thread);

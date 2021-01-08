@@ -2,7 +2,7 @@
 #include <queue>
 #include "instruction_dispatcher.h"
 #include "instruction_set.h"
-#include "src/parser.h"
+#include "parser.h"
 
 using namespace std;
 
@@ -66,7 +66,7 @@ void run_single_instruction(Program program, Thread thread) {
    
     int x = thread.program_pointer[0];
     int y = thread.program_pointer[1];
-    char instruction = program[x][y];
+    char instruction = program.grid[x][y];
     eval_instruction(instruction, thread);
 
     // update_direction(program, thread);
