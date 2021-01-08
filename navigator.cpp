@@ -102,19 +102,13 @@ void apply_one_neighbour_rule(bool neighbours[4], Thread thread) {
 }
 
 void apply_three_neighbour_rule(bool neighbours[4], Thread thread) {
-    std::stack<int> main_stack = thread.main_stack;
-    int top_element = main_stack.top();
-    
-    if (top_element == 0) {
-        // go straight, unless there is a wall straight ahead
-        if (wall_ahead(neighbours, thread)) {
-            // there is wall ahead, go back
-            turn_back(thread);
-        } else {
-           // go straight - no need to change direction
-        }
-    } else if 
 
+    // apply 4 neighbours' rule, then reverse direction if heading into wall
+    apply_four_neighbour_rule(neighbours, thread);
+
+    if (wall_ahead(neighbours, thread)) {
+        turn_back(thread);
+    }
 
 }
 
@@ -172,5 +166,22 @@ void turn_back(Thread thread) {
         thread.current_direction = Thread.LEFT;
     }
 
+}
+
+// checks whether there is a wall in current travel direction
+// neighbours is [left, right, up, down]
+bool wall_ahead(bool[] neighbours, Thread thread) {
+    switch(thread.current_direction) {
+        case Thread.LEFT:
+            return !neighbours[0];
+        case Thread.RIGHT:
+            return !neighbours[1];
+        case Thread.UP:
+            return !neighbours[2];
+        case Thread.DOWN:
+            return !neighbours[3];
+        default:
+            break;
+    }
 }
 
