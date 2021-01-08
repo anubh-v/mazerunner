@@ -9,7 +9,7 @@
 #define SIZE 10
 
 void parse(Program *p) {
-	char **grid = malloc(sizeof(char*) * SIZE);
+	char **grid = (char **) malloc(sizeof(char*) * SIZE);
 
     int c, i, j;
     c = i = j = 0;
