@@ -1,4 +1,8 @@
 
+Mazerunner is a two dimensional programming language that supports multi-threading. It is an extension of the Labyrinth language. 
+Programs are written as mazes. Control flow decisions are made at maze junctions.
+New threads can also be spawned at junctions, allowing the program to explore multiple branches of the maze concurrently.
+
 State needed for each thread:
 - Position of program pointer
 - Stack
