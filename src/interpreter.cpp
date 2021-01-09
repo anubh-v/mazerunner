@@ -3,6 +3,7 @@
 #include "instruction_dispatcher.h"
 #include "instruction_set.h"
 #include "parser.h"
+#include "navigator.h"
 
 using namespace std;
 
@@ -10,7 +11,7 @@ void set_starting_pointer(Thread thread, Program program);
 
 void run_single_instruction(Program program, Thread thread);
 
-//void update_direction(char** program, Thread thread);
+void update_direction(char** program, Thread thread);
 
 void interpret(Program program) {
 
@@ -69,7 +70,7 @@ void run_single_instruction(Program program, Thread thread) {
     char instruction = program.grid[x][y];
     eval_instruction(instruction, thread);
 
-    // update_direction(program, thread);
+    update_direction(program, thread);
 
 }
 
